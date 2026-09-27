@@ -83,7 +83,8 @@ TEST_F(TitledUrlMatchUtilsTest, TitledUrlMatchToAutocompleteMatch) {
   std::u16string input_text(u"goo");
   std::u16string match_title(u"Google Search");
   GURL match_url("https://www.google.com/");
-  AutocompleteMatchType::Type type = AutocompleteMatchType::BOOKMARK_TITLE;
+  omnibox::AutocompleteMatchType type =
+      omnibox::AutocompleteMatchType::kBookmarkTitle;
   int relevance = 123;
   int bookmark_count = 3;
 
@@ -140,7 +141,8 @@ AutocompleteMatch BuildTestAutocompleteMatch(
     const bookmarks::TitledUrlMatch::MatchPositions& match_positions) {
   std::u16string input_text(base::ASCIIToUTF16(input_text_s));
   std::u16string match_title(u"The Facebook");
-  AutocompleteMatchType::Type type = AutocompleteMatchType::BOOKMARK_TITLE;
+  omnibox::AutocompleteMatchType type =
+      omnibox::AutocompleteMatchType::kBookmarkTitle;
   int relevance = 123;
   int bookmark_count = 3;
 
@@ -271,7 +273,8 @@ TEST_F(TitledUrlMatchUtilsTest, EmptyInlineAutocompletion) {
   std::u16string input_text(u"goo");
   std::u16string match_title(u"Email by Google");
   GURL match_url("http://www.gmail.com/google");
-  AutocompleteMatchType::Type type = AutocompleteMatchType::BOOKMARK_TITLE;
+  omnibox::AutocompleteMatchType type =
+      omnibox::AutocompleteMatchType::kBookmarkTitle;
   int relevance = 123;
   int bookmark_count = 3;
 
@@ -348,7 +351,7 @@ TEST_F(TitledUrlMatchUtilsTest, PathsInContentsAndDescription) {
     AutocompleteInput input(std::u16string(), metrics::OmniboxEventProto::NTP,
                             classifier);
     AutocompleteMatch autocomplete_match = TitledUrlMatchToAutocompleteMatch(
-        titled_url_match, AutocompleteMatchType::BOOKMARK_TITLE, 1,
+        titled_url_match, omnibox::AutocompleteMatchType::kBookmarkTitle, 1,
         /*bookmark_count=*/3, provider.get(), classifier, input,
         std::u16string());
     EXPECT_EQ(base::UTF16ToUTF8(autocomplete_match.contents),

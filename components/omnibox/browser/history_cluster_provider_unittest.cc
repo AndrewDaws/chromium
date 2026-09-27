@@ -35,8 +35,8 @@ AutocompleteMatch CreateMatch(std::u16string contents,
                               int relevance = 100) {
   AutocompleteMatch match;
   match.contents = contents;
-  match.type = is_search ? AutocompleteMatchType::SEARCH_SUGGEST
-                         : AutocompleteMatchType::HISTORY_URL;
+  match.type = is_search ? omnibox::AutocompleteMatchType::kSearchSuggest
+                         : omnibox::AutocompleteMatchType::kHistoryUrl;
   match.relevance = relevance;
   return match;
 }

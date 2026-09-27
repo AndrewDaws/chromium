@@ -1120,7 +1120,7 @@ AutocompleteMatch HistoryURLProvider::HistoryMatchToACMatch(
   bool deletable =
       !!info.visit_count() && client()->AllowDeletingBrowserHistory();
   AutocompleteMatch match(this, relevance, deletable,
-                          AutocompleteMatchType::HISTORY_URL);
+                          omnibox::AutocompleteMatchType::kHistoryUrl);
   match.typed_count = info.typed_count();
   match.destination_url = info.url();
   DCHECK(match.destination_url.is_valid());

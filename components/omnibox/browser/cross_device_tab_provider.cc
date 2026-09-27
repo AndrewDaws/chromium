@@ -74,7 +74,7 @@ AutocompleteMatch CreateCrossDeviceTabMatch(
 
   AutocompleteMatch match(provider, omnibox::kDefaultRemoteZeroSuggestRelevance,
                           /*deletable=*/false,
-                          AutocompleteMatchType::CROSS_DEVICE_TAB);
+                          omnibox::AutocompleteMatchType::kCrossDeviceTab);
   match.destination_url = navigation.virtual_url();
   match.description = navigation.title();
   match.description_class = ClassifyTermMatches(
@@ -245,7 +245,7 @@ void CrossDeviceTabProvider::RecordInteractionMetrics(const OmniboxLog& log) {
   size_t cross_device_tab_position = 0;
   for (size_t i = 0; i < log.result->size(); ++i) {
     if (log.result->match_at(i).type ==
-        AutocompleteMatchType::CROSS_DEVICE_TAB) {
+        omnibox::AutocompleteMatchType::kCrossDeviceTab) {
       cross_device_tab_shown = true;
       cross_device_tab_position = i;
       break;
@@ -260,7 +260,7 @@ void CrossDeviceTabProvider::RecordInteractionMetrics(const OmniboxLog& log) {
 
   const bool cross_device_row_clicked =
       log.result->match_at(log.selection.line).type ==
-      AutocompleteMatchType::CROSS_DEVICE_TAB;
+      omnibox::AutocompleteMatchType::kCrossDeviceTab;
 
   // Log actual age when shown (impression) on navigation.
   const AutocompleteMatch& match = log.result->match_at(position);

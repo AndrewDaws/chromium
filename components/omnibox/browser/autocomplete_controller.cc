@@ -330,14 +330,15 @@ bool ShouldPreserveLastDefaultMatch(
 
 // Helper function to retrieve domains that will be used to find a match between
 // historical suggestions and a company entity suggestion. Matches of
-// AutocompleteMatchType::HISTORY_URL type will return the domain of
-// |destination_url| and those of AutocompleteMatchType::SEARCH_SUGGEST_ENTITY
-// will return the domain of |website_uri|. For any other match types,
-// GetDomain() should not be called.
+// omnibox::AutocompleteMatchType::kHistoryUrl type will return the domain of
+// |destination_url| and those of
+// omnibox::AutocompleteMatchType::kSearchSuggestEntity will return the domain
+// of |website_uri|. For any other match types, GetDomain() should not be
+// called.
 std::u16string GetDomain(const AutocompleteMatch& match) {
-  DCHECK(match.type == AutocompleteMatchType::HISTORY_URL ||
-         match.type == AutocompleteMatchType::SEARCH_SUGGEST_ENTITY);
-  GURL url = match.type == AutocompleteMatchType::HISTORY_URL
+  DCHECK(match.type == omnibox::AutocompleteMatchType::kHistoryUrl ||
+         match.type == omnibox::AutocompleteMatchType::kSearchSuggestEntity);
+  GURL url = match.type == omnibox::AutocompleteMatchType::kHistoryUrl
                  ? match.destination_url
                  : GURL(match.website_uri);
   std::u16string url_host;
@@ -440,10 +441,10 @@ void AutocompleteController::ExtendMatchSubtypes(
       // aren't personalized by the server. That is, it indicates either
       // client-side most-likely URL suggestions or server-side suggestions
       // that depend only on the URL as context.
-      if (match.type == AutocompleteMatchType::NAVSUGGEST) {
+      if (match.type == omnibox::AutocompleteMatchType::kNavsuggest) {
         subtypes->emplace(omnibox::SUBTYPE_ZERO_PREFIX_LOCAL_FREQUENT_URLS);
         subtypes->emplace(omnibox::SUBTYPE_URL_BASED);
-      } else if (match.type == AutocompleteMatchType::SEARCH_SUGGEST) {
+      } else if (match.type == omnibox::AutocompleteMatchType::kSearchSuggest) {
         subtypes->emplace(omnibox::SUBTYPE_URL_BASED);
       }
     } else if (match.provider->type() ==
@@ -459,55 +460,55 @@ void AutocompleteController::ExtendMatchSubtypes(
   }
 
   switch (match.type) {
-    case AutocompleteMatchType::SEARCH_SUGGEST_PERSONALIZED: {
+    case omnibox::AutocompleteMatchType::kSearchSuggestPersonalized: {
       subtypes->emplace(omnibox::SUBTYPE_PERSONAL);
       break;
     }
-    case AutocompleteMatchType::SEARCH_WHAT_YOU_TYPED: {
+    case omnibox::AutocompleteMatchType::kSearchWhatYouTyped: {
       subtypes->emplace(omnibox::SUBTYPE_OMNIBOX_ECHO_SEARCH);
       break;
     }
-    case AutocompleteMatchType::URL_WHAT_YOU_TYPED: {
+    case omnibox::AutocompleteMatchType::kUrlWhatYouTyped: {
       subtypes->emplace(omnibox::SUBTYPE_OMNIBOX_ECHO_URL);
       break;
     }
-    case AutocompleteMatchType::SEARCH_HISTORY: {
+    case omnibox::AutocompleteMatchType::kSearchHistory: {
       subtypes->emplace(omnibox::SUBTYPE_OMNIBOX_HISTORY_SEARCH);
       break;
     }
-    case AutocompleteMatchType::HISTORY_URL: {
+    case omnibox::AutocompleteMatchType::kHistoryUrl: {
       subtypes->emplace(omnibox::SUBTYPE_OMNIBOX_HISTORY_URL);
       break;
     }
-    case AutocompleteMatchType::HISTORY_TITLE: {
+    case omnibox::AutocompleteMatchType::kHistoryTitle: {
       subtypes->emplace(omnibox::SUBTYPE_OMNIBOX_HISTORY_TITLE);
       break;
     }
-    case AutocompleteMatchType::HISTORY_BODY: {
+    case omnibox::AutocompleteMatchType::kHistoryBody: {
       subtypes->emplace(omnibox::SUBTYPE_OMNIBOX_HISTORY_BODY);
       break;
     }
-    case AutocompleteMatchType::HISTORY_KEYWORD: {
+    case omnibox::AutocompleteMatchType::kHistoryKeyword: {
       subtypes->emplace(omnibox::SUBTYPE_OMNIBOX_HISTORY_KEYWORD);
       break;
     }
-    case AutocompleteMatchType::BOOKMARK_TITLE: {
+    case omnibox::AutocompleteMatchType::kBookmarkTitle: {
       subtypes->emplace(omnibox::SUBTYPE_OMNIBOX_BOOKMARK_TITLE);
       break;
     }
-    case AutocompleteMatchType::NAVSUGGEST_PERSONALIZED: {
+    case omnibox::AutocompleteMatchType::kNavsuggestPersonalized: {
       subtypes->emplace(omnibox::SUBTYPE_PERSONAL);
       break;
     }
-    case AutocompleteMatchType::CLIPBOARD_URL: {
+    case omnibox::AutocompleteMatchType::kClipboardUrl: {
       subtypes->emplace(omnibox::SUBTYPE_CLIPBOARD_URL);
       break;
     }
-    case AutocompleteMatchType::CLIPBOARD_TEXT: {
+    case omnibox::AutocompleteMatchType::kClipboardText: {
       subtypes->emplace(omnibox::SUBTYPE_CLIPBOARD_TEXT);
       break;
     }
-    case AutocompleteMatchType::CLIPBOARD_IMAGE: {
+    case omnibox::AutocompleteMatchType::kClipboardImage: {
       subtypes->emplace(omnibox::SUBTYPE_CLIPBOARD_IMAGE);
       break;
     }
@@ -925,7 +926,7 @@ void AutocompleteController::OnProviderUpdate(
   if (done_state == ProviderDoneState::kAllDone) {
     size_t calculator_count =
         std::ranges::count_if(published_result_, [](const auto& match) {
-          return match.type == AutocompleteMatchType::CALCULATOR;
+          return match.type == omnibox::AutocompleteMatchType::kCalculator;
         });
     UMA_HISTOGRAM_COUNTS_100("Omnibox.NumCalculatorMatches", calculator_count);
   }
@@ -1661,7 +1662,7 @@ void AutocompleteController::AggregateNewMatches() {
       CHECK(match->associated_keyword.empty());
       if (!match->description.empty() &&
           !AutocompleteMatch::IsSearchType(match->type) &&
-          match->type != AutocompleteMatchType::DOCUMENT_SUGGESTION) {
+          match->type != omnibox::AutocompleteMatchType::kDocumentSuggestion) {
         match->swap_contents_and_description = true;
       }
 
@@ -2274,7 +2275,7 @@ void AutocompleteController::UpdateTailSuggestPrefix(
   const auto common_prefix = result->GetCommonPrefix();
   if (!common_prefix.empty()) {
     for (auto& match : *result) {
-      if (match.type == AutocompleteMatchType::SEARCH_SUGGEST_TAIL) {
+      if (match.type == omnibox::AutocompleteMatchType::kSearchSuggestTail) {
         match.tail_suggest_common_prefix = common_prefix;
       }
     }
@@ -2348,7 +2349,8 @@ bool AutocompleteController::ShouldDeferNotifyChanged(
   return std::ranges::all_of(
       internal_result_, [](const AutocompleteMatch& match) {
         return match.from_previous ||
-               match.type == AutocompleteMatchType::SEARCH_WHAT_YOU_TYPED;
+               match.type ==
+                   omnibox::AutocompleteMatchType::kSearchWhatYouTyped;
       });
 }
 
@@ -2876,12 +2878,13 @@ void AutocompleteController::MaybeRemoveCompanyEntityImages(
   }
   std::u16string history_domain;
   // First match must be of history URL type to ablate entity image.
-  if (result->match_at(0)->type == AutocompleteMatchType::HISTORY_URL) {
+  if (result->match_at(0)->type ==
+      omnibox::AutocompleteMatchType::kHistoryUrl) {
     history_domain = GetDomain(*result->match_at(0));
   }
 
   auto iter = std::ranges::find_if(result->matches_, [](const auto& match) {
-    return match.type == AutocompleteMatchType::SEARCH_SUGGEST_ENTITY;
+    return match.type == omnibox::AutocompleteMatchType::kSearchSuggestEntity;
   });
   if (iter == result->matches_.end()) {
     return;
@@ -2892,7 +2895,7 @@ void AutocompleteController::MaybeRemoveCompanyEntityImages(
     for (auto it = iter; it != result->matches_.end(); it++) {
       // Do not attempt to change image to search loupe if not an entity
       // suggestion.
-      if (it->type != AutocompleteMatchType::SEARCH_SUGGEST_ENTITY) {
+      if (it->type != omnibox::AutocompleteMatchType::kSearchSuggestEntity) {
         continue;
       }
       // Check that the entity domain matches the history domain.

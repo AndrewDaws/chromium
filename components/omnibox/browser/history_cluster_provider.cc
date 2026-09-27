@@ -154,7 +154,7 @@ AutocompleteMatch HistoryClusterProvider::CreateMatch(
     history::ClusterKeywordData matched_keyword_data) {
   AutocompleteMatch match;
   match.provider = this;
-  match.type = AutocompleteMatch::Type::HISTORY_CLUSTER;
+  match.type = omnibox::AutocompleteMatchType::kHistoryCluster;
 
   match.relevance =
       history_clusters::GetConfig()

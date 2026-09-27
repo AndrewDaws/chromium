@@ -34,7 +34,7 @@ void RecentlyClosedTabsProvider::Start(const AutocompleteInput& input,
 
   matches_.clear();
   AutocompleteMatch match{this, 2000, false,
-                          AutocompleteMatchType::HISTORY_URL};
+                          omnibox::AutocompleteMatchType::kHistoryUrl};
   match.destination_url = GURL{"https://google.com"};
   match.contents = u"";
   match.description = u"";

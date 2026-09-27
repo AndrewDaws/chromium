@@ -1177,8 +1177,8 @@ AutocompleteMatch EnterpriseSearchAggregatorProvider::CreateMatch(
     const std::u16string& description,
     const std::u16string& contents,
     const std::u16string& fill_into_edit) {
-  auto type = is_navigation ? AutocompleteMatchType::NAVSUGGEST
-                            : AutocompleteMatchType::SEARCH_SUGGEST;
+  auto type = is_navigation ? omnibox::AutocompleteMatchType::kNavsuggest
+                            : omnibox::AutocompleteMatchType::kSearchSuggest;
   AutocompleteMatch match(this, relevance_data.relevance, false, type);
 
   match.destination_url = GURL(url);

@@ -464,7 +464,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest,
   CreatePopupForTestQuery();
   ACMatches matches;
   AutocompleteMatch match(nullptr, 500, false,
-                          AutocompleteMatchType::HISTORY_TITLE);
+                          omnibox::AutocompleteMatchType::kHistoryTitle);
   match.destination_url = GURL("https://foobar.com");
   match.contents = u"https://foobar.com";
   match.description = u"FooBarCom";
@@ -553,7 +553,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest,
   CreatePopupForTestQuery();
   ACMatches matches;
   AutocompleteMatch match(nullptr, 500, false,
-                          AutocompleteMatchType::HISTORY_TITLE);
+                          omnibox::AutocompleteMatchType::kHistoryTitle);
   match.destination_url = GURL("https://foobar.com");
   match.contents = u"https://foobar.com";
   match.description = u"FooBarCom";
@@ -618,7 +618,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest,
   CreatePopupForTestQuery();
   ACMatches matches;
   AutocompleteMatch match(nullptr, 500, false,
-                          AutocompleteMatchType::HISTORY_TITLE);
+                          omnibox::AutocompleteMatchType::kHistoryTitle);
   match.contents = u"https://foobar.com";
   match.description = u"The Foo Of All Bars";
   match.has_tab_match = true;
@@ -700,7 +700,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest,
   // Create a match to populate the autocomplete.
   std::u16string match_url = u"https://foobar.com";
   AutocompleteMatch match(nullptr, 500, false,
-                          AutocompleteMatchType::HISTORY_TITLE);
+                          omnibox::AutocompleteMatchType::kHistoryTitle);
   match.contents = match_url;
   match.contents_class.emplace_back(0, ACMatchClassification::URL);
   match.destination_url = GURL(match_url);
@@ -801,7 +801,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest, AccessibleResultName) {
   CreatePopupForTestQuery();
   ACMatches matches;
   AutocompleteMatch match(nullptr, 500, false,
-                          AutocompleteMatchType::HISTORY_TITLE);
+                          omnibox::AutocompleteMatchType::kHistoryTitle);
   match.destination_url = GURL("https://foobar.com");
   match.contents = u"https://foobar.com";
   match.description = u"FooBarCom";
@@ -834,7 +834,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest, DeleteSuggestion) {
   {
     std::u16string match_url = u"https://example.com/";
     AutocompleteMatch match(nullptr, 500, /*deletable=*/true,
-                            AutocompleteMatchType::HISTORY_TITLE);
+                            omnibox::AutocompleteMatchType::kHistoryTitle);
     match.contents = match_url;
     match.contents_class.emplace_back(0, ACMatchClassification::URL);
     match.destination_url = GURL(match_url);
@@ -847,7 +847,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest, DeleteSuggestion) {
   {
     std::u16string match_url = u"https://google.com/";
     AutocompleteMatch match(nullptr, 500, false,
-                            AutocompleteMatchType::HISTORY_TITLE);
+                            omnibox::AutocompleteMatchType::kHistoryTitle);
     match.contents = match_url;
     match.contents_class.emplace_back(0, ACMatchClassification::URL);
     match.destination_url = GURL(match_url);
@@ -964,7 +964,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest,
   CreatePopupForTestQuery();
   ACMatches matches;
   AutocompleteMatch match(nullptr, 500, false,
-                          AutocompleteMatchType::HISTORY_TITLE);
+                          omnibox::AutocompleteMatchType::kHistoryTitle);
   match.destination_url = GURL("https://foobar.com");
   match.contents = u"https://foobar.com";
   match.description = u"FooBarCom";
@@ -1078,7 +1078,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupSuggestionGroupHeadersTest,
   {
     std::u16string match_url = u"https://google.com/search?q=foo1";
     AutocompleteMatch match(nullptr, 500, false,
-                            AutocompleteMatchType::SEARCH_SUGGEST);
+                            omnibox::AutocompleteMatchType::kSearchSuggest);
     match.contents = u"foo1";
     match.contents_class.emplace_back(0, ACMatchClassification::URL);
     match.destination_url = GURL(match_url);
@@ -1094,7 +1094,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupSuggestionGroupHeadersTest,
   {
     std::u16string match_url = u"https://google.com/search?q=foo2";
     AutocompleteMatch match(nullptr, 450, false,
-                            AutocompleteMatchType::SEARCH_SUGGEST);
+                            omnibox::AutocompleteMatchType::kSearchSuggest);
     match.contents = u"foo2";
     match.contents_class.emplace_back(0, ACMatchClassification::URL);
     match.destination_url = GURL(match_url);

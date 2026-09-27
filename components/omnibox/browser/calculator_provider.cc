@@ -87,8 +87,9 @@ void CalculatorProvider::UpdateFromSearch() {
 
   // Find and cache any search calculator matches.
   for (const auto& match : search_provider_->matches()) {
-    if (match.type == AutocompleteMatchType::CALCULATOR)
+    if (match.type == omnibox::AutocompleteMatchType::kCalculator) {
       AddMatchToCache(match);
+    }
   }
 
   done_ = true;

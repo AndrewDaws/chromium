@@ -164,7 +164,7 @@ AutocompleteMatch TabGroupProvider::CreateTabGroupMatch(
     int score,
     const std::u16string& matching_url) {
   AutocompleteMatch match(this, score, /*deletable=*/false,
-                          AutocompleteMatchType::TAB_GROUP);
+                          omnibox::AutocompleteMatchType::kTabGroup);
   match.contents = group.title();
   match.fill_into_edit = match.contents;
   auto contents_terms = FindTermMatches(input.text(), match.contents);

@@ -52,7 +52,7 @@ class OmniboxRowGroupedViewBrowserTest : public OmniboxPopupViewViewsTest {
                                 bool is_contextual_search_suggestion = false,
                                 int relevance = 100) {
     AutocompleteMatch match(nullptr, relevance, false,
-                            AutocompleteMatchType::SEARCH_SUGGEST);
+                            omnibox::AutocompleteMatchType::kSearchSuggest);
     match.contents = description;
     match.contents_class.push_back({0, ACMatchClassification::NONE});
     match.description = description;

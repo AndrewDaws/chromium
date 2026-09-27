@@ -78,7 +78,7 @@ class AutocompleteControllerMetricsTest : public testing::Test {
   AutocompleteMatch CreateMatch(int i) {
     const std::string name = base::NumberToString(i);
     AutocompleteMatch match{nullptr, 1000, false,
-                            AutocompleteMatchType::HISTORY_URL};
+                            omnibox::AutocompleteMatchType::kHistoryUrl};
     match.destination_url = GURL{"https://google.com/" + name};
     return match;
   }
