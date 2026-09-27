@@ -6471,12 +6471,14 @@ interface MimeTypeArray
 interface ModelContext : EventTarget
     attribute @@toStringTag
     getter ontoolactivated
+    getter ontoolcancel
     getter ontoolchange
     method constructor
     method executeTool
     method getTools
     method registerTool
     setter ontoolactivated
+    setter ontoolcancel
     setter ontoolchange
 interface Mojo
     static method bindInterface
@@ -10086,6 +10088,10 @@ interface ToggleEvent : Event
     getter source
     method constructor
 interface ToolActivatedEvent : Event
+    attribute @@toStringTag
+    getter toolName
+    method constructor
+interface ToolCancelEvent : Event
     attribute @@toStringTag
     getter toolName
     method constructor
