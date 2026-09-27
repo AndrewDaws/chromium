@@ -128,7 +128,7 @@ void LogShowAge(base::TimeDelta age) {
 
 CrossDeviceTabProvider::CrossDeviceTabProvider(
     AutocompleteProviderClient* client)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_CROSS_DEVICE_TAB),
+    : AutocompleteProvider(AutocompleteProvider::Type::kCrossDeviceTab),
       client_(client) {}
 
 CrossDeviceTabProvider::~CrossDeviceTabProvider() = default;

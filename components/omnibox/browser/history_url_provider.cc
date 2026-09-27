@@ -399,7 +399,7 @@ size_t HistoryURLProviderParams::EstimateMemoryUsage() const {
 
 HistoryURLProvider::HistoryURLProvider(AutocompleteProviderClient* client,
                                        AutocompleteProviderListener* listener)
-    : HistoryProvider(AutocompleteProvider::TYPE_HISTORY_URL, client),
+    : HistoryProvider(AutocompleteProvider::Type::kHistoryUrl, client),
       params_(nullptr),
       search_url_database_(OmniboxFieldTrial::HUPSearchDatabase()) {
   AddListener(listener);

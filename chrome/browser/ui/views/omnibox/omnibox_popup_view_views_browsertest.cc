@@ -827,7 +827,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest, AccessibleResultName) {
 
 IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest, DeleteSuggestion) {
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   controller()->autocomplete_controller()->providers_.push_back(provider);
 
   ACMatches matches;
@@ -1067,7 +1067,7 @@ IN_PROC_BROWSER_TEST_F(OmniboxPopupViewViewsTest,
 IN_PROC_BROWSER_TEST_F(OmniboxPopupSuggestionGroupHeadersTest,
                        ShowSuggestionGroupHeadersByPageContext) {
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   controller()->autocomplete_controller()->providers_.push_back(provider);
 
   const auto group1 = omnibox::GroupId::GROUP_VISITED_DOC_RELATED;

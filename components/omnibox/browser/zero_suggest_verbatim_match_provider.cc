@@ -57,7 +57,8 @@ bool IsVerbatimMatchEligible(
 
 ZeroSuggestVerbatimMatchProvider::ZeroSuggestVerbatimMatchProvider(
     AutocompleteProviderClient* client)
-    : AutocompleteProvider(TYPE_VERBATIM_MATCH), client_(client) {}
+    : AutocompleteProvider(AutocompleteProvider::Type::kVerbatimMatch),
+      client_(client) {}
 
 ZeroSuggestVerbatimMatchProvider::~ZeroSuggestVerbatimMatchProvider() = default;
 

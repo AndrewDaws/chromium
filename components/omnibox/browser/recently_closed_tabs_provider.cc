@@ -19,7 +19,7 @@
 RecentlyClosedTabsProvider::RecentlyClosedTabsProvider(
     AutocompleteProviderClient* client,
     AutocompleteProviderListener* listener)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_RECENTLY_CLOSED_TABS),
+    : AutocompleteProvider(AutocompleteProvider::Type::kRecentlyClosedTabs),
       client_(client) {
   AddListener(listener);
 }

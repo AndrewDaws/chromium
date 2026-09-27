@@ -129,7 +129,7 @@ void RecordDeletingClipboardSuggestionMetrics(
 ClipboardProvider::ClipboardProvider(AutocompleteProviderClient* client,
                                      AutocompleteProviderListener* listener,
                                      ClipboardRecentContent* clipboard_content)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_CLIPBOARD),
+    : AutocompleteProvider(AutocompleteProvider::Type::kClipboard),
       client_(client),
       clipboard_content_(clipboard_content),
       current_url_suggested_times_(0) {

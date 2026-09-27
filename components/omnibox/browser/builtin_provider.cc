@@ -23,7 +23,7 @@
 const int BuiltinProvider::kRelevance = 860;
 
 BuiltinProvider::BuiltinProvider(AutocompleteProviderClient* client)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_BUILTIN),
+    : AutocompleteProvider(AutocompleteProvider::Type::kBuiltin),
       client_(client) {
   builtins_ = client_->GetBuiltinURLs();
   template_url_service_ = client->GetTemplateURLService();

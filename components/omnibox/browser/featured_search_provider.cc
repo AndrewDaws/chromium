@@ -190,7 +190,7 @@ bool IsEnterpriseSearchAggregatorTemplateURLEnabled(const TemplateURL& turl,
 FeaturedSearchProvider::FeaturedSearchProvider(
     AutocompleteProviderClient* client,
     bool show_iph_matches)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_FEATURED_SEARCH),
+    : AutocompleteProvider(AutocompleteProvider::Type::kFeaturedSearch),
       client_(client),
       template_url_service_(client->GetTemplateURLService()),
       show_iph_matches_(show_iph_matches) {}

@@ -42,7 +42,8 @@ class OmniboxRowGroupedViewBrowserTest : public OmniboxPopupViewViewsTest {
     if (IsSkipped()) {
       return;
     }
-    provider_ = new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+    provider_ =
+        new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
     controller()->autocomplete_controller()->providers_.push_back(provider_);
   }
 

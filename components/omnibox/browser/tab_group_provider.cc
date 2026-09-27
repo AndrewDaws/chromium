@@ -119,7 +119,7 @@ std::pair<int, std::u16string> Score(
 }  // namespace
 
 TabGroupProvider::TabGroupProvider(AutocompleteProviderClient* client)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_OPEN_TAB),
+    : AutocompleteProvider(AutocompleteProvider::Type::kOpenTab),
       client_(client) {}
 
 TabGroupProvider::~TabGroupProvider() = default;

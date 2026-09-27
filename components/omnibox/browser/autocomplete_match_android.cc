@@ -161,8 +161,8 @@ void AutocompleteMatch::UpdateWithClipboardContent(
     JNIEnv* env,
     const base::android::JavaRef<jobject>& j_callback) {
   DCHECK(provider) << "No provider available";
-  DCHECK(provider->type() == AutocompleteProvider::TYPE_CLIPBOARD)
-      << "Invalid provider type: " << provider->type();
+  DCHECK(provider->type() == AutocompleteProvider::Type::kClipboard)
+      << "Invalid provider type: " << static_cast<int>(provider->type());
 
   ClipboardProvider* clipboard_provider =
       static_cast<ClipboardProvider*>(provider);

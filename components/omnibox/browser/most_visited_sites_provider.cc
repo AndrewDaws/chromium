@@ -387,7 +387,7 @@ void MostVisitedSitesProvider::Stop(AutocompleteStopReason stop_reason) {
 MostVisitedSitesProvider::MostVisitedSitesProvider(
     AutocompleteProviderClient* client,
     AutocompleteProviderListener* listener)
-    : AutocompleteProvider(TYPE_MOST_VISITED_SITES),
+    : AutocompleteProvider(AutocompleteProvider::Type::kMostVisitedSites),
       device_form_factor_{ui::GetDeviceFormFactor()},
       client_{client} {
   AddListener(listener);

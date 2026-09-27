@@ -1304,7 +1304,7 @@ size_t AutocompleteResult::CalculateNumMatchesPerUrlCount(
     // Skip unscoped extension provider matches. This match limit will be
     // adjusted to include these matches.
     if (match.provider && match.provider->type() ==
-                              AutocompleteProvider::TYPE_UNSCOPED_EXTENSION) {
+                              AutocompleteProvider::Type::kUnscopedExtension) {
       num_unscoped_extension_matches++;
       continue;
     }
@@ -1837,7 +1837,7 @@ AutocompleteResult::MatchDedupComparator
 AutocompleteResult::GetMatchComparisonFields(const AutocompleteMatch& match) {
   AutocompleteMatchDedupeType type;
   if (match.provider != nullptr &&
-      match.provider->type() == AutocompleteProvider::TYPE_VERBATIM_MATCH) {
+      match.provider->type() == AutocompleteProvider::Type::kVerbatimMatch) {
     type = AutocompleteMatchDedupeType::kVerbatimProvider;
   } else if (match.type == AutocompleteMatchType::kCalculator) {
     type = AutocompleteMatchDedupeType::kCalculator;

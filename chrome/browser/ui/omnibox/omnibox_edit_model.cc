@@ -2017,7 +2017,8 @@ gfx::Image OmniboxEditModel::GetMatchIconIfExtension(
   // in the rich suggestions bitmaps. Fall back to the extension icon if empty
   // or not found.
   if (match.provider &&
-      match.provider->type() == AutocompleteProvider::TYPE_UNSCOPED_EXTENSION &&
+      match.provider->type() ==
+          AutocompleteProvider::Type::kUnscopedExtension &&
       !match.ImageUrl().is_empty()) {
     const SkBitmap* bitmap = GetPopupRichSuggestionBitmap(match.image_url);
     if (bitmap) {
@@ -2953,7 +2954,7 @@ void OmniboxEditModel::OpenMatch(
     if (ui::PageTransitionTypeIncludingQualifiersIs(
             match.transition, ui::PAGE_TRANSITION_KEYWORD) ||
         match.provider->type() ==
-            AutocompleteProvider::TYPE_UNSCOPED_EXTENSION) {
+            AutocompleteProvider::Type::kUnscopedExtension) {
       // User is in keyword mode or accepted an unscoped extension suggestion,
       // increment usage count for the keyword.
       searchbox::EmitAcceptedKeywordSuggestionHistogram(

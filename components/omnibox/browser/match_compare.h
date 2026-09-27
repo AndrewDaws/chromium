@@ -69,7 +69,7 @@ class CompareWithDemoteByType {
     return (demotion_it == demotions_.end() ||
             (match.type == omnibox::AutocompleteMatchType::kNavsuggest &&
              match.provider->type() ==
-                 AutocompleteProvider::Type::TYPE_ENTERPRISE_SEARCH_AGGREGATOR))
+                 AutocompleteProvider::Type::kEnterpriseSearchAggregator))
                ? match.relevance
                : (match.relevance * demotion_it->second);
   }

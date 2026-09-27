@@ -1105,7 +1105,7 @@ TEST_F(RealboxHandlerTest, ForceShowDescriptionNeverEnabledForRealbox) {
       {{"Omnibox_AskGShowFirstDescription", "true"}});
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
 
   AutocompleteMatch match(provider.get(), 1000, false,
                           omnibox::AutocompleteMatchType::kSearchSuggest);
@@ -1444,7 +1444,7 @@ TEST_F(WebuiOmniboxHandlerTest, WebuiOmniboxUpdatesSelection) {
 
 TEST_F(WebuiOmniboxHandlerTest, SetPopupSelection_IgnoresOutOfBounds) {
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   AutocompleteMatch match1(provider.get(), 1000, false,
                            omnibox::AutocompleteMatchType::kUrlWhatYouTyped);
   match1.destination_url = GURL("https://example1.com");
@@ -1728,7 +1728,7 @@ TEST_F(WebuiOmniboxHandlerTest,
 
 TEST_F(WebuiOmniboxHandlerTest, OpenAutocompleteMatch_KeyboardModifiers) {
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   AutocompleteMatch match(provider.get(), 1000, false,
                           omnibox::AutocompleteMatchType::kUrlWhatYouTyped);
   match.destination_url = GURL("https://example.com");
@@ -1765,7 +1765,7 @@ TEST_F(WebuiOmniboxHandlerTest, OpenAutocompleteMatch_HistoricalSnapshot) {
       .Times(testing::AnyNumber());
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   AutocompleteMatch match1(provider.get(), 1000, false,
                            omnibox::AutocompleteMatchType::kUrlWhatYouTyped);
   match1.destination_url = GURL("https://snapshot-match.com");
@@ -1841,7 +1841,7 @@ TEST_F(WebuiOmniboxHandlerTest, OpenAutocompleteMatch_LiveResultMatch) {
       .Times(testing::AnyNumber());
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   AutocompleteMatch match(provider.get(), 1000, false,
                           omnibox::AutocompleteMatchType::kUrlWhatYouTyped);
   match.destination_url = GURL("https://live-match.com");
@@ -1890,7 +1890,7 @@ TEST_F(WebuiOmniboxHandlerTest,
       .Times(testing::AnyNumber());
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   AutocompleteMatch match(provider.get(), 1000, false,
                           omnibox::AutocompleteMatchType::kUrlWhatYouTyped);
   match.destination_url = GURL("https://live-match.com");
@@ -1937,7 +1937,7 @@ TEST_F(WebuiOmniboxHandlerTest, OpenAutocompleteMatch_UrlMismatch) {
       .Times(testing::AnyNumber());
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   AutocompleteMatch match(provider.get(), 1000, false,
                           omnibox::AutocompleteMatchType::kUrlWhatYouTyped);
   match.destination_url = GURL("https://expected-match.com");
@@ -1984,7 +1984,7 @@ TEST_F(WebuiOmniboxHandlerTest, OpenAutocompleteMatch_IndexOutOfBounds) {
       .Times(testing::AnyNumber());
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   AutocompleteMatch match(provider.get(), 1000, false,
                           omnibox::AutocompleteMatchType::kUrlWhatYouTyped);
   match.destination_url = GURL("https://expected-match.com");
@@ -2194,7 +2194,7 @@ TEST_F(WebuiOmniboxHandlerTest,
   testing::Mock::VerifyAndClearExpectations(&page_);
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
 
   AutocompleteMatch match1(provider.get(), 1000, false,
                            omnibox::AutocompleteMatchType::kSearchSuggest);
@@ -2245,7 +2245,7 @@ TEST_F(WebuiOmniboxHandlerTest,
   testing::Mock::VerifyAndClearExpectations(&page_);
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
 
   AutocompleteMatch match1(provider.get(), 1000, false,
                            omnibox::AutocompleteMatchType::kSearchSuggest);

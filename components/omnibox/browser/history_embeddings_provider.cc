@@ -52,7 +52,7 @@ bool IsAnswerDone(history_embeddings::ComputeAnswerStatus status) {
 HistoryEmbeddingsProvider::HistoryEmbeddingsProvider(
     AutocompleteProviderClient* client,
     AutocompleteProviderListener* listener)
-    : HistoryProvider(AutocompleteProvider::TYPE_HISTORY_EMBEDDINGS, client) {
+    : HistoryProvider(AutocompleteProvider::Type::kHistoryEmbeddings, client) {
   AddListener(listener);
 }
 

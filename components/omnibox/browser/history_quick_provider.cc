@@ -55,7 +55,7 @@ constexpr int kAndroidHubMaxMatches = 5;
 bool HistoryQuickProvider::disabled_ = false;
 
 HistoryQuickProvider::HistoryQuickProvider(AutocompleteProviderClient* client)
-    : HistoryProvider(AutocompleteProvider::TYPE_HISTORY_QUICK, client),
+    : HistoryProvider(AutocompleteProvider::Type::kHistoryQuick, client),
       in_memory_url_index_(client->GetInMemoryURLIndex()) {}
 
 void HistoryQuickProvider::Start(const AutocompleteInput& input,

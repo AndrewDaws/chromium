@@ -215,7 +215,7 @@ bool OmniboxMatchCellView::ShouldDisplayImage(const AutocompleteMatch& match) {
   return match.type == omnibox::AutocompleteMatchType::kCalculator ||
          (!match.image_url.is_empty() &&
           match.provider->type() !=
-              AutocompleteProvider::TYPE_UNSCOPED_EXTENSION) ||
+              AutocompleteProvider::Type::kUnscopedExtension) ||
          (match.HasTakeoverAction(
               OmniboxActionId::CONTEXTUAL_SEARCH_OPEN_LENS) &&
           omnibox_feature_configs::ContextualSearch::Get()

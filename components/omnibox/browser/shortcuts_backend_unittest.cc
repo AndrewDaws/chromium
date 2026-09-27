@@ -568,8 +568,7 @@ TEST_F(ShortcutsBackendTest, AddAndUpdateShortcut_ZeroSuggest) {
   EXPECT_FALSE(changed_notified());
 
   scoped_refptr<FakeAutocompleteProvider> zero_suggest_provider =
-      new FakeAutocompleteProvider(
-          AutocompleteProvider::Type::TYPE_ZERO_SUGGEST);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kZeroSuggest);
   AutocompleteMatch zero_suggest_match(
       zero_suggest_provider.get(), 400, true,
       omnibox::AutocompleteMatchType::kTileMostVisitedSite);

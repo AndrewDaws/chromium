@@ -111,7 +111,7 @@ class BaseSearchProviderTestFixture {
         search_engines_test_environment_.template_url_service());
 
     provider_ = new NiceMock<TestBaseSearchProvider>(
-        AutocompleteProvider::TYPE_SEARCH, client_.get());
+        AutocompleteProvider::Type::kSearch, client_.get());
   }
 
   base::test::TaskEnvironment task_environment_;

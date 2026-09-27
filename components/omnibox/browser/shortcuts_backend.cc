@@ -338,7 +338,7 @@ void ShortcutsBackend::AddOrUpdateShortcut(const std::u16string& text,
   // contains the current page URL). Ignore these navigations as shortcut
   // suggestions are not provided in zero suggest.
   if (match.provider &&
-      match.provider->type() == AutocompleteProvider::TYPE_ZERO_SUGGEST) {
+      match.provider->type() == AutocompleteProvider::Type::kZeroSuggest) {
     return;
   }
 

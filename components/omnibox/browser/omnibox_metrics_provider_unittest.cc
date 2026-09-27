@@ -42,7 +42,7 @@ class OmniboxMetricsProviderTest : public testing::Test {
 
   void SetUp() override {
     autocomplete_provider_ =
-        new FakeAutocompleteProvider(AutocompleteProvider::TYPE_SEARCH);
+        new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
     metrics_provider_ = std::make_unique<OmniboxMetricsProvider>();
   }
 

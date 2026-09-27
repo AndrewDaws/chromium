@@ -365,7 +365,8 @@ bool ContextualSearchProvider::LensEntrypointEligible(
 ContextualSearchProvider::ContextualSearchProvider(
     AutocompleteProviderClient* client,
     AutocompleteProviderListener* listener)
-    : BaseSearchProvider(AutocompleteProvider::TYPE_CONTEXTUAL_SEARCH, client) {
+    : BaseSearchProvider(AutocompleteProvider::Type::kContextualSearch,
+                         client) {
   AddListener(listener);
 }
 

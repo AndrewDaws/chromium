@@ -122,22 +122,22 @@ int GetDeduplicationProviderPreferenceScore(
           // from their stale counterparts from the shortcut, history, and
           // bookmark providers. The latter often have stale metadata such as
           // last access date.
-          {AutocompleteProvider::TYPE_DOCUMENT, 2},
-          {AutocompleteProvider::TYPE_ENTERPRISE_SEARCH_AGGREGATOR, 2},
+          {AutocompleteProvider::Type::kDocument, 2},
+          {AutocompleteProvider::Type::kEnterpriseSearchAggregator, 2},
           // Prefer bookmark suggestions, as:
           // 1) Their titles may be explicitly set.
           // 2) They may display enhanced information such as the bookmark
           //    folders path.
-          {AutocompleteProvider::TYPE_BOOKMARK, 1},
+          {AutocompleteProvider::Type::kBookmark, 1},
           // Don't let bookmarks override builtins, as that interferes with
           // starter pack matches when user has bookmarked their destination.
-          {AutocompleteProvider::TYPE_BUILTIN, kIsDesktop ? 1 : 0},
+          {AutocompleteProvider::Type::kBuiltin, kIsDesktop ? 1 : 0},
           // Prefer non-shorcut matches over shortcuts, the latter of which may
           // have stale or missing URL titles (the latter from what-you-typed
           // matches).
-          {AutocompleteProvider::TYPE_SHORTCUTS, -1},
+          {AutocompleteProvider::Type::kShortcuts, -1},
           // Prefer non-fuzzy matches over fuzzy matches.
-          {AutocompleteProvider::TYPE_HISTORY_FUZZY, -2},
+          {AutocompleteProvider::Type::kHistoryFuzzy, -2},
       });
   const auto it = kProviderPrefMap.find(type);
   return it != kProviderPrefMap.end() ? it->second : 0;
@@ -599,7 +599,7 @@ const gfx::VectorIcon& AutocompleteMatch::GetVectorIcon(
 
     case Type::kSearchOtherEngine:
       if (provider != nullptr &&
-          provider->type() == AutocompleteProvider::TYPE_UNSCOPED_EXTENSION) {
+          provider->type() == AutocompleteProvider::Type::kUnscopedExtension) {
         return features::IsRoundedIconsEnabled()
                    ? omnibox::kExtensionFilledIcon
                    : omnibox::kExtensionAppOldIcon;
@@ -1621,7 +1621,7 @@ bool AutocompleteMatch::IsVerbatimType() const {
   const bool is_keyword_verbatim_match =
       (type == omnibox::AutocompleteMatchType::kSearchOtherEngine &&
        provider != nullptr &&
-       provider->type() == AutocompleteProvider::TYPE_SEARCH);
+       provider->type() == AutocompleteProvider::Type::kSearch);
   return type == omnibox::AutocompleteMatchType::kSearchWhatYouTyped ||
          type == omnibox::AutocompleteMatchType::kUrlWhatYouTyped ||
          is_keyword_verbatim_match;
@@ -1637,7 +1637,7 @@ bool AutocompleteMatch::IsVerbatimUrlSuggestion() const {
 
 bool AutocompleteMatch::IsSearchProviderSearchSuggestion() const {
   const bool from_search_provider =
-      (provider && provider->type() == AutocompleteProvider::TYPE_SEARCH);
+      (provider && provider->type() == AutocompleteProvider::Type::kSearch);
   return from_search_provider &&
          type != omnibox::AutocompleteMatchType::kSearchWhatYouTyped;
 }
@@ -1645,7 +1645,7 @@ bool AutocompleteMatch::IsSearchProviderSearchSuggestion() const {
 bool AutocompleteMatch::IsOnDeviceSearchSuggestion() const {
   const bool from_on_device_provider =
       (provider &&
-       provider->type() == AutocompleteProvider::TYPE_ON_DEVICE_HEAD);
+       provider->type() == AutocompleteProvider::Type::kOnDeviceHead);
   return from_on_device_provider && subtypes.contains(271);
 }
 

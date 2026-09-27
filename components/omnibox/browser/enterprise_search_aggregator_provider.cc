@@ -649,7 +649,7 @@ EnterpriseSearchAggregatorProvider::EnterpriseSearchAggregatorProvider(
     AutocompleteProviderClient* client,
     AutocompleteProviderListener* listener)
     : AutocompleteProvider(
-          AutocompleteProvider::TYPE_ENTERPRISE_SEARCH_AGGREGATOR),
+          AutocompleteProvider::Type::kEnterpriseSearchAggregator),
       client_(client),
       debouncer_(std::make_unique<AutocompleteProviderDebouncer>(true, 300)),
       template_url_service_(client_->GetTemplateURLService()) {

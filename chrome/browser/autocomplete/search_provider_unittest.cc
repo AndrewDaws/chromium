@@ -1177,8 +1177,8 @@ TEST_F(SearchProviderTest, KeywordOrderingAndDescriptions) {
   AutocompleteController controller(
       std::make_unique<TestAutocompleteProviderClient>(
           profile_.get(), &test_url_loader_factory_),
-      AutocompleteControllerConfig{.provider_types =
-                                       AutocompleteProvider::TYPE_SEARCH});
+      AutocompleteControllerConfig{.provider_types = static_cast<int>(
+                                       AutocompleteProvider::Type::kSearch)});
   AutocompleteInput input(u"k t", metrics::OmniboxEventProto::OTHER,
                           ChromeAutocompleteSchemeClassifier(profile_.get()));
   controller.Start(input);

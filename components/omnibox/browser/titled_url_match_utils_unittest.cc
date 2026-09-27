@@ -95,7 +95,7 @@ TEST_F(TitledUrlMatchUtilsTest, TitledUrlMatchToAutocompleteMatch) {
   titled_url_match.url_match_positions = {{12, 15}};
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_BOOKMARK);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kBookmark);
   TestSchemeClassifier classifier;
   AutocompleteInput input(input_text, metrics::OmniboxEventProto::NTP,
                           classifier);
@@ -166,7 +166,7 @@ AutocompleteMatch BuildTestAutocompleteMatch(
 TEST_F(TitledUrlMatchUtilsTest, DoTrimHttpScheme) {
   scoped_refptr<FakeAutocompleteProvider> provider =
       base::MakeRefCounted<FakeAutocompleteProvider>(
-          AutocompleteProvider::Type::TYPE_BOOKMARK);
+          AutocompleteProvider::Type::kBookmark);
   GURL match_url("http://www.facebook.com/");
   AutocompleteMatch autocomplete_match =
       BuildTestAutocompleteMatch(provider, "face", match_url, {{11, 15}});
@@ -194,7 +194,7 @@ TEST_F(TitledUrlMatchUtilsTest, DontTrimHttpSchemeIfInputHasScheme) {
 
   scoped_refptr<FakeAutocompleteProvider> provider =
       base::MakeRefCounted<FakeAutocompleteProvider>(
-          AutocompleteProvider::Type::TYPE_BOOKMARK);
+          AutocompleteProvider::Type::kBookmark);
   GURL match_url("http://www.facebook.com/");
   AutocompleteMatch autocomplete_match = BuildTestAutocompleteMatch(
       provider, "http://face", match_url, {{11, 15}});
@@ -218,7 +218,7 @@ TEST_F(TitledUrlMatchUtilsTest, DontTrimHttpSchemeIfInputHasScheme) {
 TEST_F(TitledUrlMatchUtilsTest, DoTrimHttpsScheme) {
   scoped_refptr<FakeAutocompleteProvider> provider =
       base::MakeRefCounted<FakeAutocompleteProvider>(
-          AutocompleteProvider::Type::TYPE_BOOKMARK);
+          AutocompleteProvider::Type::kBookmark);
   GURL match_url("https://www.facebook.com/");
   AutocompleteMatch autocomplete_match =
       BuildTestAutocompleteMatch(provider, "face", match_url, {{12, 16}});
@@ -246,7 +246,7 @@ TEST_F(TitledUrlMatchUtilsTest, DontTrimHttpsSchemeIfInputHasScheme) {
 
   scoped_refptr<FakeAutocompleteProvider> provider =
       base::MakeRefCounted<FakeAutocompleteProvider>(
-          AutocompleteProvider::Type::TYPE_BOOKMARK);
+          AutocompleteProvider::Type::kBookmark);
   GURL match_url("https://www.facebook.com/");
   AutocompleteMatch autocomplete_match = BuildTestAutocompleteMatch(
       provider, "https://face", match_url, {{12, 16}});
@@ -286,7 +286,7 @@ TEST_F(TitledUrlMatchUtilsTest, EmptyInlineAutocompletion) {
   titled_url_match.has_ancestor_match = false;
 
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_BOOKMARK);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kBookmark);
   TestSchemeClassifier classifier;
   AutocompleteInput input(input_text, metrics::OmniboxEventProto::NTP,
                           classifier);
@@ -329,7 +329,7 @@ TEST_F(TitledUrlMatchUtilsTest, EmptyInlineAutocompletion) {
 
 TEST_F(TitledUrlMatchUtilsTest, PathsInContentsAndDescription) {
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_BOOKMARK);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kBookmark);
   TestSchemeClassifier classifier;
   std::vector<std::u16string> ancestors = {u"parent", u"grandparent"};
 

@@ -24,7 +24,7 @@
 CalculatorProvider::CalculatorProvider(AutocompleteProviderClient* client,
                                        AutocompleteProviderListener* listener,
                                        SearchProvider* search_provider)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_CALCULATOR),
+    : AutocompleteProvider(AutocompleteProvider::Type::kCalculator),
       client_(client),
       search_provider_(search_provider) {
   CHECK(search_provider_);

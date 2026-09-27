@@ -37,7 +37,7 @@ using bookmarks::BookmarkNode;
 using bookmarks::TitledUrlMatch;
 
 BookmarkProvider::BookmarkProvider(AutocompleteProviderClient* client)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_BOOKMARK),
+    : AutocompleteProvider(AutocompleteProvider::Type::kBookmark),
       client_(client),
       bookmark_model_(client ? client_->GetBookmarkModel() : nullptr) {}
 

@@ -83,7 +83,7 @@ void ScopedEndExtensionKeywordMode::StayInKeywordMode() {
 
 KeywordProvider::KeywordProvider(AutocompleteProviderClient* client,
                                  AutocompleteProviderListener* listener)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_KEYWORD),
+    : AutocompleteProvider(AutocompleteProvider::Type::kKeyword),
       model_(client->GetTemplateURLService()),
       extensions_delegate_(client->GetKeywordExtensionsDelegate(this)),
       client_(client) {

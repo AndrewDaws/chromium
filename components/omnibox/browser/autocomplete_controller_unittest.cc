@@ -1230,7 +1230,7 @@ TEST_F(AutocompleteControllerTest, MlRanking_PiecewiseMappedSearchBlending) {
       }));
 
   scoped_refptr<FakeAutocompleteProvider> shortcut_provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_SHORTCUTS);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kShortcuts);
 
   auto shortcut_match = CreateMlScoredMatch(
       "shortcut 600 0.75", omnibox::AutocompleteMatchType::kHistoryUrl, true,
@@ -2544,7 +2544,7 @@ TEST_F(AutocompleteControllerTest, ShouldRunProvider_StarterPack) {
   // Not in keyword mode, run all providers except open tab provider.
   for (auto& provider : controller_.providers()) {
     EXPECT_EQ(controller_.ShouldRunProvider(provider.get()),
-              provider->type() != AutocompleteProvider::TYPE_OPEN_TAB)
+              provider->type() != AutocompleteProvider::Type::kOpenTab)
         << "Provider Type: "
         << AutocompleteProvider::TypeToString(provider->type());
   }
@@ -2554,9 +2554,9 @@ TEST_F(AutocompleteControllerTest, ShouldRunProvider_StarterPack) {
 
   // In @tabs, run search, keyword, and open tab provider only.
   controller_.input_.UpdateText(u"@tabs", 0, {});
-  expected_provider_types = {AutocompleteProvider::TYPE_KEYWORD,
-                             AutocompleteProvider::TYPE_SEARCH,
-                             AutocompleteProvider::TYPE_OPEN_TAB};
+  expected_provider_types = {AutocompleteProvider::Type::kKeyword,
+                             AutocompleteProvider::Type::kSearch,
+                             AutocompleteProvider::Type::kOpenTab};
   for (auto& provider : controller_.providers()) {
     EXPECT_EQ(controller_.ShouldRunProvider(provider.get()),
               expected_provider_types.contains(provider->type()))
@@ -2566,9 +2566,9 @@ TEST_F(AutocompleteControllerTest, ShouldRunProvider_StarterPack) {
 
   // In @bookmarks, run search, keyword, and bookmarks only.
   controller_.input_.UpdateText(u"@bookmarks", 0, {});
-  expected_provider_types = {AutocompleteProvider::TYPE_KEYWORD,
-                             AutocompleteProvider::TYPE_SEARCH,
-                             AutocompleteProvider::TYPE_BOOKMARK};
+  expected_provider_types = {AutocompleteProvider::Type::kKeyword,
+                             AutocompleteProvider::Type::kSearch,
+                             AutocompleteProvider::Type::kBookmark};
   for (auto& provider : controller_.providers()) {
     EXPECT_EQ(controller_.ShouldRunProvider(provider.get()),
               expected_provider_types.contains(provider->type()))
@@ -2578,10 +2578,10 @@ TEST_F(AutocompleteControllerTest, ShouldRunProvider_StarterPack) {
 
   // In @history, run search, keyword, and history providers only.
   controller_.input_.UpdateText(u"@history", 0, {});
-  expected_provider_types = {AutocompleteProvider::TYPE_KEYWORD,
-                             AutocompleteProvider::TYPE_SEARCH,
-                             AutocompleteProvider::TYPE_HISTORY_QUICK,
-                             AutocompleteProvider::TYPE_HISTORY_URL};
+  expected_provider_types = {AutocompleteProvider::Type::kKeyword,
+                             AutocompleteProvider::Type::kSearch,
+                             AutocompleteProvider::Type::kHistoryQuick,
+                             AutocompleteProvider::Type::kHistoryUrl};
   for (auto& provider : controller_.providers()) {
     EXPECT_EQ(controller_.ShouldRunProvider(provider.get()),
               expected_provider_types.contains(provider->type()))
@@ -2615,7 +2615,7 @@ TEST_F(AutocompleteControllerTest,
       std::make_unique<TemplateURL>(turl_data));
 
   // Not in keyword mode, run all providers except open tab provider.
-  excluded_provider_types = {AutocompleteProvider::TYPE_OPEN_TAB};
+  excluded_provider_types = {AutocompleteProvider::Type::kOpenTab};
   for (auto& provider : controller_.providers()) {
     EXPECT_NE(controller_.ShouldRunProvider(provider.get()),
               excluded_provider_types.contains(provider->type()))
@@ -2628,10 +2628,10 @@ TEST_F(AutocompleteControllerTest,
   controller_.input_.UpdateText(u"keyword", 0, {});
   controller_.input_.set_in_keyword_mode(true);
   excluded_provider_types = {
-      AutocompleteProvider::TYPE_OPEN_TAB,
-      AutocompleteProvider::TYPE_HISTORY_CLUSTER_PROVIDER,
-      AutocompleteProvider::TYPE_DOCUMENT,
-      AutocompleteProvider::TYPE_ON_DEVICE_HEAD};
+      AutocompleteProvider::Type::kOpenTab,
+      AutocompleteProvider::Type::kHistoryClusterProvider,
+      AutocompleteProvider::Type::kDocument,
+      AutocompleteProvider::Type::kOnDeviceHead};
   for (auto& provider : controller_.providers()) {
     EXPECT_NE(controller_.ShouldRunProvider(provider.get()),
               excluded_provider_types.contains(provider->type()))
@@ -2642,9 +2642,9 @@ TEST_F(AutocompleteControllerTest,
   // For drive.google.com, run document provider.
   controller_.input_.UpdateText(u"drive.google.com", 0, {});
   excluded_provider_types = {
-      AutocompleteProvider::TYPE_OPEN_TAB,
-      AutocompleteProvider::TYPE_HISTORY_CLUSTER_PROVIDER,
-      AutocompleteProvider::TYPE_ON_DEVICE_HEAD};
+      AutocompleteProvider::Type::kOpenTab,
+      AutocompleteProvider::Type::kHistoryClusterProvider,
+      AutocompleteProvider::Type::kOnDeviceHead};
   for (auto& provider : controller_.providers()) {
     EXPECT_NE(controller_.ShouldRunProvider(provider.get()),
               excluded_provider_types.contains(provider->type()))
@@ -2656,7 +2656,7 @@ TEST_F(AutocompleteControllerTest,
 TEST_F(AutocompleteControllerTest, ShouldRunProvider_LensSearchbox) {
   // Run all providers except open tab provider.
   std::set<AutocompleteProvider::Type> excluded_provider_types = {
-      AutocompleteProvider::TYPE_OPEN_TAB};
+      AutocompleteProvider::Type::kOpenTab};
   controller_.input_ = AutocompleteInput(
       u"a", 1u, metrics::OmniboxEventProto::OTHER, TestSchemeClassifier());
   for (auto& provider : controller_.providers()) {
@@ -2668,7 +2668,7 @@ TEST_F(AutocompleteControllerTest, ShouldRunProvider_LensSearchbox) {
 
   // For Lens searchboxes, run search provider only.
   std::set<AutocompleteProvider::Type> expected_provider_types = {
-      AutocompleteProvider::TYPE_SEARCH};
+      AutocompleteProvider::Type::kSearch};
 
   controller_.input_ = AutocompleteInput(
       u"a", 1u, metrics::OmniboxEventProto::CONTEXTUAL_SEARCHBOX,
@@ -2731,10 +2731,10 @@ TEST_F(AutocompleteControllerTest,
 
   // Setup the providers.
   auto aggregator_provider = base::MakeRefCounted<FakeAutocompleteProvider>(
-      AutocompleteProvider::Type::TYPE_ENTERPRISE_SEARCH_AGGREGATOR);
+      AutocompleteProvider::Type::kEnterpriseSearchAggregator);
   controller_.providers_.push_back(aggregator_provider);
   auto document_provider = base::MakeRefCounted<FakeAutocompleteProvider>(
-      AutocompleteProvider::Type::TYPE_DOCUMENT);
+      AutocompleteProvider::Type::kDocument);
   controller_.providers_.push_back(document_provider);
 
   // In unscoped mode (not keyword mode), aggregator is run when
@@ -2794,8 +2794,8 @@ TEST_F(AutocompleteControllerTest,
 
   // Only search, keyword, and aggregator providers ran when in aggregator mode.
   std::set<AutocompleteProvider::Type> expected_provider_types = {
-      AutocompleteProvider::TYPE_SEARCH, AutocompleteProvider::TYPE_KEYWORD,
-      AutocompleteProvider::Type::TYPE_ENTERPRISE_SEARCH_AGGREGATOR};
+      AutocompleteProvider::Type::kSearch, AutocompleteProvider::Type::kKeyword,
+      AutocompleteProvider::Type::kEnterpriseSearchAggregator};
   controller_.input_.UpdateText(u"aggregator_not_featured", 0, {});
   for (auto& provider : controller_.providers()) {
     EXPECT_EQ(controller_.ShouldRunProvider(provider.get()),
@@ -2818,9 +2818,9 @@ TEST_F(AutocompleteControllerTest,
 TEST_F(AutocompleteControllerTest, ShouldRunProvider_AndroidHubSearch) {
   // Regular Hub search (ANDROID_HUB) should run all 4 providers.
   std::set<AutocompleteProvider::Type> expected_provider_types = {
-      AutocompleteProvider::TYPE_SEARCH, AutocompleteProvider::TYPE_OPEN_TAB,
-      AutocompleteProvider::TYPE_BOOKMARK,
-      AutocompleteProvider::TYPE_HISTORY_QUICK};
+      AutocompleteProvider::Type::kSearch, AutocompleteProvider::Type::kOpenTab,
+      AutocompleteProvider::Type::kBookmark,
+      AutocompleteProvider::Type::kHistoryQuick};
 
   controller_.input_ =
       AutocompleteInput(u"a", 1u, metrics::OmniboxEventProto::ANDROID_HUB,
@@ -2839,9 +2839,9 @@ TEST_F(AutocompleteControllerTest, ShouldRunProvider_AndroidTabSearchOverlay) {
   // providers (e.g. SearchProvider, BookmarkProvider) will filter themselves
   // out in their Start() methods.
   std::set<AutocompleteProvider::Type> expected_provider_types = {
-      AutocompleteProvider::TYPE_SEARCH, AutocompleteProvider::TYPE_OPEN_TAB,
-      AutocompleteProvider::TYPE_BOOKMARK,
-      AutocompleteProvider::TYPE_HISTORY_QUICK};
+      AutocompleteProvider::Type::kSearch, AutocompleteProvider::Type::kOpenTab,
+      AutocompleteProvider::Type::kBookmark,
+      AutocompleteProvider::Type::kHistoryQuick};
 
   AutocompleteInput input(
       u"a", 1u, metrics::OmniboxEventProto::ANDROID_TAB_SEARCH_OVERLAY,
@@ -3750,7 +3750,7 @@ TEST_F(AutocompleteControllerTest, ExcludedProviderStoppedAndUpdatesIgnored) {
   // Set up an excluded provider, e.g., OnDeviceHeadProvider which does not run
   // in keyword mode.
   auto head_provider = base::MakeRefCounted<FakeAutocompleteProvider>(
-      AutocompleteProvider::Type::TYPE_ON_DEVICE_HEAD);
+      AutocompleteProvider::Type::kOnDeviceHead);
   controller_.providers_.push_back(head_provider);
 
   // Non-keyword input: head_provider should run.

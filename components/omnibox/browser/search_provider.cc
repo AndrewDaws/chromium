@@ -175,7 +175,7 @@ class SearchProvider::CompareScoredResults {
 
 SearchProvider::SearchProvider(AutocompleteProviderClient* client,
                                AutocompleteProviderListener* listener)
-    : BaseSearchProvider(AutocompleteProvider::TYPE_SEARCH, client),
+    : BaseSearchProvider(AutocompleteProvider::Type::kSearch, client),
       providers_(client->GetTemplateURLService()) {
   AddListener(listener);
 

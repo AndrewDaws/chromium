@@ -153,7 +153,7 @@ class TestProvider : public AutocompleteProvider {
                const std::u16string& prefix,
                const std::u16string& match_keyword,
                AutocompleteProviderClient* client)
-      : AutocompleteProvider(AutocompleteProvider::TYPE_SEARCH),
+      : AutocompleteProvider(AutocompleteProvider::Type::kSearch),
         relevance_(relevance),
         prefix_(prefix),
         match_keyword_(match_keyword),
@@ -540,9 +540,10 @@ void AutocompleteProviderTest::ResetControllerWithKeywordAndSearchProviders() {
       turl_model->Add(std::make_unique<TemplateURL>(data2));
   ASSERT_NE(0, keyword_turl->id());
 
-  ResetControllerWithType(AutocompleteProvider::TYPE_KEYWORD |
-                          AutocompleteProvider::TYPE_SEARCH |
-                          AutocompleteProvider::TYPE_ZERO_SUGGEST);
+  ResetControllerWithType(
+      static_cast<int>(AutocompleteProvider::Type::kKeyword |
+                       AutocompleteProvider::Type::kSearch |
+                       AutocompleteProvider::Type::kZeroSuggest));
 }
 
 void AutocompleteProviderTest::ResetControllerWithKeywordProvider() {
@@ -575,7 +576,8 @@ void AutocompleteProviderTest::ResetControllerWithKeywordProvider() {
   keyword_turl = turl_model->Add(std::make_unique<TemplateURL>(data));
   ASSERT_NE(0, keyword_turl->id());
 
-  ResetControllerWithType(AutocompleteProvider::TYPE_KEYWORD);
+  ResetControllerWithType(
+      static_cast<int>(AutocompleteProvider::Type::kKeyword));
 }
 
 void AutocompleteProviderTest::ResetControllerWithType(int type) {
@@ -729,7 +731,7 @@ void AutocompleteProviderTest::RunExactKeymatchTest(
   // be from SearchProvider.  (It provides all verbatim search matches,
   // keyword or not.)
   RunQuery("k test", allow_exact_keyword_match);
-  EXPECT_EQ(AutocompleteProvider::TYPE_SEARCH,
+  EXPECT_EQ(AutocompleteProvider::Type::kSearch,
             controller_->result().default_match()->provider->type());
   EXPECT_EQ(allow_exact_keyword_match
                 ? omnibox::AutocompleteMatchType::kSearchOtherEngine

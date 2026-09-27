@@ -201,7 +201,7 @@ ShortcutMatch& ShortcutsProvider::ShortcutMatch::operator=(
     const ShortcutMatch& other) = default;
 
 ShortcutsProvider::ShortcutsProvider(AutocompleteProviderClient* client)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_SHORTCUTS),
+    : AutocompleteProvider(AutocompleteProvider::Type::kShortcuts),
       client_(client),
       backend_(client_->GetShortcutsBackend()) {
   if (backend_) {

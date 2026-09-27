@@ -130,7 +130,7 @@ bool ShouldRunProvider(AutocompleteProviderClient* client,
 }  // namespace
 
 OpenTabProvider::OpenTabProvider(AutocompleteProviderClient* client)
-    : AutocompleteProvider(AutocompleteProvider::TYPE_OPEN_TAB),
+    : AutocompleteProvider(AutocompleteProvider::Type::kOpenTab),
       client_(client) {}
 
 OpenTabProvider::~OpenTabProvider() = default;

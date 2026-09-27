@@ -560,12 +560,11 @@ TEST_F(AutocompleteMatchTest, DedupeDriveURLs) {
 
 TEST_F(AutocompleteMatchTest, UpgradeMatchWithPropertiesFrom) {
   scoped_refptr<FakeAutocompleteProvider> bookmark_provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_BOOKMARK);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kBookmark);
   scoped_refptr<FakeAutocompleteProvider> history_provider =
-      new FakeAutocompleteProvider(
-          AutocompleteProvider::Type::TYPE_HISTORY_QUICK);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kHistoryQuick);
   scoped_refptr<FakeAutocompleteProvider> search_provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
 
   AutocompleteMatch search_history_match(
       search_provider.get(), 500, true,
@@ -857,21 +856,19 @@ TEST_F(AutocompleteMatchTest, BetterDuplicate) {
       };
 
   scoped_refptr<FakeAutocompleteProvider> document_provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_DOCUMENT);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kDocument);
 
   scoped_refptr<FakeAutocompleteProvider> bookmark_provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_BOOKMARK);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kBookmark);
 
   scoped_refptr<FakeAutocompleteProvider> history_provider =
-      new FakeAutocompleteProvider(
-          AutocompleteProvider::Type::TYPE_HISTORY_QUICK);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kHistoryQuick);
 
   scoped_refptr<FakeAutocompleteProvider> shortcuts_provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_SHORTCUTS);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kShortcuts);
 
   scoped_refptr<FakeAutocompleteProvider> featured_search_provider =
-      new FakeAutocompleteProvider(
-          AutocompleteProvider::Type::TYPE_FEATURED_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kFeaturedSearch);
 
   // Prefer document provider matches over other providers, even if scored
   // lower.
@@ -949,7 +946,7 @@ TEST_F(AutocompleteMatchTest, BetterDuplicate) {
 
 TEST_F(AutocompleteMatchTest, FilterOmniboxActions) {
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   const OmniboxAction::LabelStrings dummy_labels(u"", u"", u"", u"");
 
   using OmniboxActionId::ACTION_IN_SUGGEST;
@@ -1044,7 +1041,7 @@ TEST_F(AutocompleteMatchTest, FilterOmniboxActions) {
 
 TEST_F(AutocompleteMatchTest, RearrangeActionsInSuggest) {
   scoped_refptr<FakeAutocompleteProvider> provider =
-      new FakeAutocompleteProvider(AutocompleteProvider::Type::TYPE_SEARCH);
+      new FakeAutocompleteProvider(AutocompleteProvider::Type::kSearch);
   const OmniboxAction::LabelStrings dummy_labels(u"", u"", u"", u"");
 
   using ActionType = omnibox::SuggestTemplateInfo::TemplateAction::ActionType;
